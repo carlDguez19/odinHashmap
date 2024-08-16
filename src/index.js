@@ -3,3 +3,7 @@
 // import styles from './main.css';
 
 // fillTest();
+import { cout } from "./hashmap";
+
+let a = "musicAAAA";
+cout(a);
