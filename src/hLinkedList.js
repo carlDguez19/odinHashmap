@@ -77,6 +77,45 @@ export class LinkedList {
             this.tail = currNode;
         }
     }
+    hGet(key) {
+        let currNode = new Node();
+        currNode = this.head;
+        while (currNode != null) {
+            if (key == currNode.key) {
+                return currNode.value;
+            }
+            currNode = currNode.next;
+        }
+        return null;
+    }
+    hHas(key) {
+        let currNode = new Node();
+        currNode = this.head;
+        while (currNode != null) {
+            if (key == currNode.key) {
+                return true;
+            }
+            currNode = currNode.next;
+        }
+        return false;
+    }
+    hRemove(key) {
+        let currNode = new Node();
+        currNode = this.head;
+        if (this.head.key == key) {
+            currNode = this.head.next;
+            this.head.next = null;
+            this.head = currNode;
+        } else {
+            while (currNode != null) {
+                if (currNode.next.key == key) {
+                    currNode.next = currNode.next.next;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
     contains(val) {
         let currNode = new Node();
         currNode = this.head;
