@@ -1,7 +1,6 @@
 // export function cout(a) {
 //     console.log(a);
 // }
-// eslint-disable-next-line no-unused-vars
 import { LinkedList } from "./hLinkedList";
 //import { Node } from "./hNode";
 
@@ -37,17 +36,17 @@ export class Hashmap {
                 insert into hashtable*/
     }//end set
 
-    get(key) {
+    get(key) {//returns value of specified key
         const getIndex = this.hash(key);
         if (this.buckets[getIndex] == null) {
             return null;
         } else {
-            let currList = this.buckets[getIndex];
+            let currList = this.buckets[getIndex];//let currList = new LinkedList()
             currList.hGet(key);
         }
     }//end get
 
-    has(key) {
+    has(key) {//returns boolean on presence of key
         const getIndex = this.hash(key);
         if (this.buckets[getIndex] == null) {
             return false;
@@ -57,7 +56,7 @@ export class Hashmap {
         }
     }
 
-    remove(key) {
+    remove(key) {//removes the specified key
         const remIndex = this.hash(key);
         if (this.has(key)) {
             // eslint-disable-next-line no-unused-vars
@@ -65,5 +64,41 @@ export class Hashmap {
         } else {
             return false;
         }
+    }
+
+    length() {//returns the total amount of keys in the hashmap
+        let totalK = 0;
+        for (let i = 0; i < this.capacity; i++) {
+            let currList = this.buckets[i];
+            totalK += currList.size();
+        }
+        return totalK;
+    }
+
+    clear() {//clears the hashmap
+        for (let i = 0; i < this.capacity; i++) {
+            let currList = this.buckets[i];
+            while (currList != null) {
+                currList.pop();
+            }
+        }
+    }
+
+    keys() {//returns array with all keys in hashmap
+        let keysArr = [];
+        for (let i = 0; i < this.capacity; i++) {
+            let currList = this.buckets[i];
+            keysArr = currList.hKeys(keysArr);
+        }
+        return keysArr;
+    }
+
+    values() {//returns array with all values in hashmap
+        let keysArr = [];
+        for (let i = 0; i < this.capacity; i++) {
+            let currList = this.buckets[i];
+            keysArr = currList.hVals(keysArr);
+        }
+        return keysArr;
     }
 }

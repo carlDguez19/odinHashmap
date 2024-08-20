@@ -116,6 +116,24 @@ export class LinkedList {
             return false;
         }
     }
+    hKeys(arr) {
+        let currNode = new Node();
+        currNode = this.head;
+        while (currNode != null) {
+            arr.push(currNode.key);
+            currNode = currNode.next;
+        }
+        return arr;
+    }
+    hVals(arr) {
+        let currNode = new Node();
+        currNode = this.head;
+        while (currNode != null) {
+            arr.push(currNode.value);
+            currNode = currNode.next;
+        }
+        return arr;
+    }
     contains(val) {
         let currNode = new Node();
         currNode = this.head;
