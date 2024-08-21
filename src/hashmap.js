@@ -10,6 +10,13 @@ export class Hashmap {
         this.buckets = new Array(16).fill(null);
         this.capacity = this.buckets.length;
         this.overload = this.capacity * this.loadFactor;
+        this.totalKeys = 0;
+    }
+
+    resize(newCap) {
+        let oldArrEntries = this.buckets;
+        this.capacity = newCap;
+
     }
 
     hash(key) {
@@ -100,5 +107,15 @@ export class Hashmap {
             keysArr = currList.hVals(keysArr);
         }
         return keysArr;
+    }
+
+    entries() {
+        let entryString = "[";
+        for (let i = 0; i < this.capacity; i++) {
+            let currList = this.buckets[i];
+            //if currList != null MAYBE
+            entryString = currList.hEntries(entryString);
+        }
+        return entryString;
     }
 }

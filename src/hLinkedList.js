@@ -134,6 +134,15 @@ export class LinkedList {
         }
         return arr;
     }
+    hEntries(eString) {
+        let currNode = new Node();
+        currNode = this.head;
+        while (currNode != null) {
+            eString += `[${currNode.key},${currNode.value}], `;
+            currNode = currNode.next;
+        }
+        return eString;
+    }
     contains(val) {
         let currNode = new Node();
         currNode = this.head;
