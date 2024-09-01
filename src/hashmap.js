@@ -1,8 +1,5 @@
-// export function cout(a) {
-//     console.log(a);
-// }
 import { LinkedList } from "./hLinkedList";
-//import { Node } from "./hNode";
+import { Node } from "./hNode";
 
 export class Hashmap {
     constructor() {
@@ -13,11 +10,23 @@ export class Hashmap {
         this.totalKeys = 0;
     }
 
-    resize(newCap) {
+    resize() {
+        let currNode = new Node();
         let oldArrEntries = this.buckets;
-        this.capacity = newCap;
-
-    }
+        this.capacity *= 2;//this.capacity = newCap;
+        this.totalKeys = 0;
+        this.buckets = new Array(this.capacity).fill(null);
+        for (let i = 0; i < oldArrEntries.length; i++) {
+            if (oldArrEntries[i]) {
+                let currList = oldArrEntries[i];
+                while (currList) {//while list is full go through linked list pop off each entry, return it and set in new size array
+                    currNode = currList.pop();
+                    this.set(currNode.key, currNode.value);
+                    this.totalKeys += 1;
+                }//end while
+            }//end if
+        }//end for
+    }//end resize function
 
     hash(key) {
         let hashCode = 0;
@@ -30,17 +39,43 @@ export class Hashmap {
         return hashCode % this.capacity;
     }
 
-    // eslint-disable-next-line no-unused-vars
     set(key, value) {
-
-        /*this creates the params as a node first then...
-         if hashtable already HAS key then
-                overwrite
-            elseif check this.length() >= OVERLOAD
-                resize hashtable
-                and insert into hashtable
-            else(theres space available)
-                insert into hashtable*/
+        let temp = new Node();
+        temp.key = key;
+        temp.value = value;
+        const i = this.hash(key);
+        if (this.has(key)) {
+            //overwrite
+            // const i = this.hash(key)
+            let currList = this.buckets[i];
+            currList.hReplace(key, value);
+        } else if (this.totalKeys >= this.overload) {
+            //resize
+            this.resize();
+            //set currNode into new size hash &%&%&%&%%&%&%&&%%% WE MUST CHECK IF this.buckets[i] is null if it is we must create a linked list first
+            //const i = this.hash(key);
+            let currList = this.buckets[i];
+            if (currList == null) {
+                const someList = new LinkedList();
+                this.buckets[i] = someList;
+                currList = this.buckets[i];
+                currList.append(key, value);
+            } else {
+                currList.append(key, value);
+            }
+        } else {
+            //set currNode into new size hash?
+            //const i = this.hash(key)
+            let currList = this.buckets[i];
+            if (currList == null) {
+                const someList = new LinkedList();
+                this.buckets[i] = someList;
+                currList = this.buckets[i];
+                currList.append(key, value);
+            } else {
+                currList.append(key, value);
+            }
+        }
     }//end set
 
     get(key) {//returns value of specified key
@@ -83,8 +118,9 @@ export class Hashmap {
     }
 
     clear() {//clears the hashmap
+        let currList = new LinkedList();
         for (let i = 0; i < this.capacity; i++) {
-            let currList = this.buckets[i];
+            currList = this.buckets[i];
             while (currList != null) {
                 currList.pop();
             }
@@ -93,29 +129,39 @@ export class Hashmap {
 
     keys() {//returns array with all keys in hashmap
         let keysArr = [];
+        console.log("\n\nkeys array: ");
         for (let i = 0; i < this.capacity; i++) {
             let currList = this.buckets[i];
-            keysArr = currList.hKeys(keysArr);
+            if (currList != null) {
+                keysArr = currList.hKeys(keysArr);
+            }
         }
         return keysArr;
     }
 
     values() {//returns array with all values in hashmap
         let keysArr = [];
+        console.log("\n\nvalue array: ");
         for (let i = 0; i < this.capacity; i++) {
             let currList = this.buckets[i];
-            keysArr = currList.hVals(keysArr);
+            if (currList != null) {
+                keysArr = currList.hVals(keysArr);
+            }
         }
         return keysArr;
     }
 
     entries() {
         let entryString = "[";
+        let result = "";
         for (let i = 0; i < this.capacity; i++) {
-            let currList = this.buckets[i];
+            let currList = new LinkedList();
+            currList = this.buckets[i];
+            if (currList != null) {
+                result += currList.hEntries(entryString);
+            }
             //if currList != null MAYBE
-            entryString = currList.hEntries(entryString);
         }
-        return entryString;
+        return result;
     }
 }

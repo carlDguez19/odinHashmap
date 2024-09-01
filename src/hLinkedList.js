@@ -5,8 +5,8 @@ export class LinkedList {
         this.head = null;
         this.tail = null;
     }
-    append(val) {
-        const tempNode = new Node(val);
+    append(key, value) {
+        const tempNode = new Node(key, value);
         if (this.head == null) {
             this.head = tempNode;
             this.tail = tempNode;
@@ -15,8 +15,8 @@ export class LinkedList {
             this.tail = tempNode;
         }
     }
-    prepend(val) {
-        const tempNode = new Node(val, this.head);//point to head as next
+    prepend(key, value) {
+        const tempNode = new Node(key, value, this.head);//point to head as next
         if (this.tail == null) {//if tail is null then that means linked list is empty
             this.head = tempNode;
             this.tail = tempNode;
@@ -60,6 +60,7 @@ export class LinkedList {
         return "invalid index";
     }
     pop() {
+        let temp = new Node();
         let currNode = new Node();
         currNode = this.head;
         if (this.head == null) {
@@ -69,12 +70,15 @@ export class LinkedList {
         else if (this.head.next == null) {
             this.head == null;
             this.tail == null;
+            return currNode;
         } else {
             while (currNode.next.next != null) {
                 currNode = currNode.next;
             }
+            temp = currNode.next;
             currNode.next = null;
             this.tail = currNode;
+            return temp;
         }
     }
     hGet(key) {
@@ -134,6 +138,7 @@ export class LinkedList {
         }
         return arr;
     }
+
     hEntries(eString) {
         let currNode = new Node();
         currNode = this.head;
@@ -143,6 +148,18 @@ export class LinkedList {
         }
         return eString;
     }
+
+    hReplace(key, value) {
+        let currNode = new Node();
+        currNode = this.head;
+        while (currNode != null) {
+            if (currNode.key == key) {
+                currNode.value == value;
+                return;
+            }
+        }
+    }
+
     contains(val) {
         let currNode = new Node();
         currNode = this.head;
