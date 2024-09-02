@@ -98,7 +98,8 @@ export class Hashmap {
             return false;
         } else {
             let currList = this.buckets[getIndex];
-            currList.hHas(key);
+            let boolT = currList.hHas(key);
+            return boolT;
         }
     }
 

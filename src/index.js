@@ -32,7 +32,7 @@ for (let i = 0; i < keys.length; i++) {
     console.log(keys[i]);
 }
 
-test.clear();
+//test.clear();
 
 let values2 = test.values();
 let nullCounter = 0;
@@ -48,3 +48,6 @@ if (nullCounter == values2.length) {
 
 let totalKeys = test.length();
 console.log("\n\nTotal keys: " + totalKeys);
+
+let boolTest = test.has("hat");
+console.log(boolTest);
