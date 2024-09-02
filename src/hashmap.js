@@ -60,8 +60,10 @@ export class Hashmap {
                 this.buckets[i] = someList;
                 currList = this.buckets[i];
                 currList.append(key, value);
+                this.totalKeys++;
             } else {
                 currList.append(key, value);
+                this.totalKeys++;
             }
         } else {
             //set currNode into new size hash?
@@ -72,8 +74,10 @@ export class Hashmap {
                 this.buckets[i] = someList;
                 currList = this.buckets[i];
                 currList.append(key, value);
+                this.totalKeys++;
             } else {
                 currList.append(key, value);
+                this.totalKeys++;
             }
         }
     }//end set
@@ -109,12 +113,7 @@ export class Hashmap {
     }
 
     length() {//returns the total amount of keys in the hashmap
-        let totalK = 0;
-        for (let i = 0; i < this.capacity; i++) {
-            let currList = this.buckets[i];
-            totalK += currList.size();
-        }
-        return totalK;
+        return this.totalKeys;
     }
 
     clear() {//clears the hashmap

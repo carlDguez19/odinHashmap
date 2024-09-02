@@ -45,3 +45,6 @@ for (let i = 0; i < values2.length; i++) {
 if (nullCounter == values2.length) {
     console.log("\n\nEMPTY!!!!!");
 }
+
+let totalKeys = test.length();
+console.log("\n\nTotal keys: " + totalKeys);
