@@ -49,5 +49,14 @@ if (nullCounter == values2.length) {
 let totalKeys = test.length();
 console.log("\n\nTotal keys: " + totalKeys);
 
-let boolTest = test.has("hat");
-console.log(boolTest);
+let boolTest = test.has("hat");//if not cleared above on line 35 then true else false
+console.log("has 'hat' : " + boolTest);
+
+let boolRem = test.remove("hat");
+console.log("remove 'hat' : " + boolRem);
+
+let boolTest2 = test.has("hat");//if not cleared above on line 35 then true else false
+console.log("has 'hat' : " + boolTest2);
+
+let getTest = test.get("lion");
+console.log(getTest);

@@ -116,6 +116,7 @@ export class LinkedList {
             currNode = this.head.next;
             this.head.next = null;
             this.head = currNode;
+            return true;
         } else {
             while (currNode != null) {
                 if (currNode.next.key == key) {

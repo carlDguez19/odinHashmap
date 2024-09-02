@@ -88,7 +88,8 @@ export class Hashmap {
             return null;
         } else {
             let currList = this.buckets[getIndex];//let currList = new LinkedList()
-            currList.hGet(key);
+            let getVal = currList.hGet(key);
+            return getVal;
         }
     }//end get
 
@@ -108,6 +109,8 @@ export class Hashmap {
         if (this.has(key)) {
             // eslint-disable-next-line no-unused-vars
             let currList = this.buckets[remIndex];
+            let remBool = currList.hRemove(key);
+            return remBool;
         } else {
             return false;
         }
