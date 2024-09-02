@@ -81,6 +81,12 @@ export class LinkedList {
             return temp;
         }
     }
+
+    clearBucket() {
+        this.head = null;
+        this.tail = null;
+    }
+
     hGet(key) {
         let currNode = new Node();
         currNode = this.head;

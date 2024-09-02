@@ -32,13 +32,16 @@ for (let i = 0; i < keys.length; i++) {
     console.log(keys[i]);
 }
 
-//test.clear();
+test.clear();
 
-// let values2 = test.values();
-// if (values.length == 0) {
-//     console.log("\n\nEMPTY!!!!!!!!!!");
-// } else {
-//     for (let i = 0; i < values2.length; i++) {
-//         console.log(values2[i]);
-//     }
-// }
+let values2 = test.values();
+let nullCounter = 0;
+for (let i = 0; i < values2.length; i++) {
+    console.log(values2[i]);
+    if (values2[i] == null) {
+        nullCounter++;
+    }
+}
+if (nullCounter == values2.length) {
+    console.log("\n\nEMPTY!!!!!");
+}

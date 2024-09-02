@@ -121,8 +121,8 @@ export class Hashmap {
         let currList = new LinkedList();
         for (let i = 0; i < this.capacity; i++) {
             currList = this.buckets[i];
-            while (currList != null) {
-                currList.pop();
+            if (currList != null) {
+                currList.clearBucket();
             }
         }
     }
